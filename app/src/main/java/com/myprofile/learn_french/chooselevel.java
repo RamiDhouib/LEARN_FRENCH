@@ -9,45 +9,14 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class chooselevel extends AppCompatActivity {
     HomeWatcher mHomeWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final Button button = findViewById(R.id.start);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Button start Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this,chooselevel.class);
-                startActivity(intent);
-            }
-        });
-        final Button button1 = findViewById(R.id.sound);
-        button1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Button sound Clicked", Toast.LENGTH_SHORT).show();
-                if (mServ.mPlayer.isPlaying()){
-                    mServ.pauseMusic();
-                }
-                else
-                    mServ.resumeMusic();
-            }
-        });
-        final Button button2 = findViewById(R.id.exit);
-        button2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Exiting app", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-
-
+        setContentView(R.layout.activity_chooselevel);
         doBindService();
         Intent music = new Intent();
         music.setClass(this, MusicService.class);
