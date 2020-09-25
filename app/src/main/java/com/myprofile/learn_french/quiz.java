@@ -9,26 +9,13 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.view.View;
-import android.widget.Button;
 
-public class chooselevel extends AppCompatActivity {
-    HomeWatcher mHomeWatcher;
+public class quiz extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chooselevel);
-        final Button button = findViewById(R.id.animals);
-
-        final Button animals = findViewById(R.id.animals);
-        animals.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(chooselevel.this,quiz.class);
-                startActivity(intent);            }
-        });
-
-
+        setContentView(R.layout.activity_quiz);
         doBindService();
         Intent music = new Intent();
         music.setClass(this, MusicService.class);
@@ -68,7 +55,7 @@ public class chooselevel extends AppCompatActivity {
 
     void doBindService(){
         bindService(new Intent(this,MusicService.class),
-                Scon,Context.BIND_AUTO_CREATE);
+                Scon, Context.BIND_AUTO_CREATE);
         mIsBound = true;
     }
 
