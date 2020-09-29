@@ -42,7 +42,7 @@ public class quiz extends AppCompatActivity {
     Boolean bt_3;
     Boolean bt_4;
     //initialising the Timer to schedule tasks//
-    Timer timer;
+    Timer timer=new Timer();
     // function that makes the answers random expect the right one_beta //
 
     private void fixbuttons(Button bt_t,Button bt_2,Button bt_3,Button bt_4){
@@ -253,13 +253,13 @@ public class quiz extends AppCompatActivity {
         if (rand_int==1){
             fixbuttons(button_1,button_2,button_3,button_4);
         }
-        if (rand_int==1){
+        if (rand_int==2){
             fixbuttons(button_2,button_1,button_3,button_4);
         }
-        if (rand_int==1){
+        if (rand_int==3){
             fixbuttons(button_3,button_2,button_1,button_4);
         }
-        if (rand_int==1){
+        if (rand_int==4){
             fixbuttons(button_4,button_2,button_3,button_1);
         }
         onclick();
@@ -273,9 +273,10 @@ public class quiz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_quiz);
+        img= (ImageView) findViewById(R.id.imageView);
         pos=0;
         score=0;
-        setContentView(R.layout.activity_quiz);
         button_1 = findViewById(R.id.button_1);
         button_2 = findViewById(R.id.button_2);
         button_3 = findViewById(R.id.button_3);

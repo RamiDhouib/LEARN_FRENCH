@@ -17,17 +17,16 @@ public class intro extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         Intent intent = new Intent(this,intro.class);
         timer = new Timer();
-        MediaPlayer player=MediaPlayer.create(this,R.raw.disguisedpanda);
+        final MediaPlayer player=MediaPlayer.create(this,R.raw.disguisedpanda);
         player.start();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Intent intent = new Intent(intro.this ,MainActivity.class);
                 startActivity(intent);
+                player.release();
                 finish();
             }
         }, 5000);
-        player.release();
-        startActivity(intent);
     }
 }
