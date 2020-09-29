@@ -11,16 +11,15 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     HomeWatcher mHomeWatcher;
+    private MusicService mServ;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final Button button = findViewById(R.id.start);
+    private void clickbuttons(){
+        final ImageButton button = findViewById(R.id.start);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Button start Clicked", Toast.LENGTH_SHORT).show();
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        final Button button1 = findViewById(R.id.sound);
+        final ImageButton button1 = findViewById(R.id.sound);
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Button sound Clicked", Toast.LENGTH_SHORT).show();
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     mServ.resumeMusic();
             }
         });
-        final Button button2 = findViewById(R.id.exit);
+        final ImageButton button2 = findViewById(R.id.exit);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Exiting app", Toast.LENGTH_SHORT).show();
@@ -47,12 +46,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        clickbuttons();
 
         doBindService();
         Intent music = new Intent();
         music.setClass(this, MusicService.class);
         startService(music);
-        HomeWatcher mHomeWatcher;
 
         mHomeWatcher = new HomeWatcher(this);
         mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
@@ -72,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         mHomeWatcher.startWatch();
     }
     private boolean mIsBound = false;
-    private MusicService mServ;
     private ServiceConnection Scon =new ServiceConnection(){
 
         public void onServiceConnected(ComponentName name, IBinder

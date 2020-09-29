@@ -14,13 +14,15 @@ import android.widget.Button;
 
 public class chooselevel extends AppCompatActivity {
     HomeWatcher mHomeWatcher;
+    Intent music = new Intent();
+    private boolean mIsBound = false;
+    private MusicService mServ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chooselevel);
-        final Button button = findViewById(R.id.animals);
-
         final Button animals = findViewById(R.id.animals);
         animals.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -28,12 +30,9 @@ public class chooselevel extends AppCompatActivity {
                 startActivity(intent);            }
         });
 
-
         doBindService();
-        Intent music = new Intent();
         music.setClass(this, MusicService.class);
         startService(music);
-        HomeWatcher mHomeWatcher;
 
         mHomeWatcher = new HomeWatcher(this);
         mHomeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
@@ -52,8 +51,7 @@ public class chooselevel extends AppCompatActivity {
         });
         mHomeWatcher.startWatch();
     }
-    private boolean mIsBound = false;
-    private MusicService mServ;
+
     private ServiceConnection Scon =new ServiceConnection(){
 
         public void onServiceConnected(ComponentName name, IBinder
