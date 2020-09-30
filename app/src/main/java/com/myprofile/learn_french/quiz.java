@@ -13,6 +13,7 @@ import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -31,6 +32,8 @@ public class quiz extends AppCompatActivity {
     int[] images={R.drawable.cochon,R.drawable.mouton,R.drawable.abeille,R.drawable.cheval,R.drawable.grenouille,R.drawable.lapin,R.drawable.mouton,R.drawable.poulet,R.drawable.souris,R.drawable.taureau,R.drawable.tortue,R.drawable.vache,R.drawable.ane};
     //initialising the imageview//
     ImageView img;
+    //initialising textview of the score//
+    TextView score_txt;
     // initialising the buttons //
     Button button_1;
     Button button_2;
@@ -58,6 +61,7 @@ public class quiz extends AppCompatActivity {
     }
     //fix on click buttons based on button_answer boolean//
     private void onclick() {
+
         button_1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button//
@@ -235,35 +239,46 @@ public class quiz extends AppCompatActivity {
     // make all button_answer_boolean false and background back to default//
     private void falsebuttons(){
         bt_1=false;
-        button_1.setBackgroundResource(android.R.drawable.btn_default);
+        button_1.setTextColor(Color.BLACK);
         bt_2=false;
-        button_2.setBackgroundResource(android.R.drawable.btn_default);
+        button_2.setTextColor(Color.BLACK);
         bt_3=false;
-        button_3.setBackgroundResource(android.R.drawable.btn_default);
+        button_3.setTextColor(Color.BLACK);
         bt_4=false;
-        button_4.setBackgroundResource(android.R.drawable.btn_default);
+        button_4.setTextColor(Color.BLACK);
 
     }
+    // a function that convert any number to a string//
+    private String to_string(int Number){
+        return Integer.toString(Number);
+    }
     private void main(int i){
-        img.setImageResource(images[pos]);
-        falsebuttons();
-        Random rand = new Random();
-        int rand_int = rand.nextInt(4)+1;
-        changebuttons(rand_int);
-        if (rand_int==1){
-            fixbuttons(button_1,button_2,button_3,button_4);
-        }
-        if (rand_int==2){
-            fixbuttons(button_2,button_1,button_3,button_4);
-        }
-        if (rand_int==3){
-            fixbuttons(button_3,button_2,button_1,button_4);
-        }
-        if (rand_int==4){
-            fixbuttons(button_4,button_2,button_3,button_1);
-        }
-        onclick();
+        runOnUiThread(new Runnable() {
 
+            @Override
+            public void run() {
+
+                // Stuff that updates the UI//
+                score_txt.setText("score: "+to_string(score));
+                img.setImageResource(images[pos]);
+                falsebuttons();
+                Random rand = new Random();
+                int rand_int = rand.nextInt(4) + 1;
+                changebuttons(rand_int);
+                if (rand_int == 1) {
+                    fixbuttons(button_1, button_2, button_3, button_4);
+                }
+                if (rand_int == 2) {
+                    fixbuttons(button_2, button_1, button_3, button_4);
+                }
+                if (rand_int == 3) {
+                    fixbuttons(button_3, button_2, button_1, button_4);
+                }
+                if (rand_int == 4) {
+                    fixbuttons(button_4, button_2, button_3, button_1);
+                }
+                onclick();
+            }});
 
 
 
@@ -275,6 +290,7 @@ public class quiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         img= (ImageView) findViewById(R.id.imageView);
+        score_txt= (TextView) findViewById(R.id.score);
         pos=0;
         score=0;
         button_1 = findViewById(R.id.button_1);
