@@ -37,8 +37,8 @@ public class chooselevel extends AppCompatActivity {
         animals.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(chooselevel.this,quiz.class);
-                startActivity(intent);
                 finish();
+                startActivity(intent);
             }
         });
 
