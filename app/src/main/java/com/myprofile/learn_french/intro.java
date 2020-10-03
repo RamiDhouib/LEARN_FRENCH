@@ -15,7 +15,6 @@ public class intro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        Intent intent = new Intent(this,intro.class);
         timer = new Timer();
         final MediaPlayer player=MediaPlayer.create(this,R.raw.disguisedpanda);
         player.start();
